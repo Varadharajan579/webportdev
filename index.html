@@ -78,7 +78,8 @@
         </div>
 
         <div class="hero-media" aria-hidden="false">
-          <img src="assets/profile.jpg" alt="Profile photo of Varadharajan K" class="profile-photo" />
+          <!-- Profile image: if you want local use assets/profile.jpg; Drive image will be loaded by JS if present -->
+          <img id="profile-img" src="assets/profile.jpg" alt="Profile photo of Varadharajan K" class="profile-photo" />
           <div class="badges">
             <span class="badge">Problem Solving</span>
             <span class="badge">Real-time Business Solutions</span>
@@ -94,7 +95,7 @@
       <div class="container">
         <h2>About Me</h2>
         <div class="about-grid">
-          <img src="assets/profile.jpg" alt="Profile photo" class="about-photo" />
+          <img id="about-photo" src="assets/profile.jpg" alt="Profile photo" class="about-photo" />
           <div>
             <p class="summary">I am an aspiring Java backend developer with hands-on experience building web applications using Spring Boot and MySQL. I focus on designing scalable services, solving engineering problems, and collaborating effectively with teams to deliver production-ready features.</p>
             <p><strong>Highlights</strong></p>
@@ -207,13 +208,13 @@
         <div class="cert-carousel-section">
           <h3>Certificates</h3>
           <div class="cert-carousel" id="cert-carousel" aria-roledescription="carousel" tabindex="0">
-            <!-- script.js will add images from assets/certificates/ or fallback placeholders -->
+            <!-- script.js will add Drive images + Google Doc PDF + local placeholders -->
           </div>
           <div class="cert-controls">
             <button id="cert-prev" aria-label="Previous certificate">◀</button>
             <button id="cert-next" aria-label="Next certificate">▶</button>
           </div>
-          <p class="muted">To submit certificates: add images to <code>assets/certificates/</code> in this repo (e.g. certificate1.jpg). Alternatively upload your certificate images to Google Drive and paste the shareable link(s) in the README or 'Certificates' field on your application portal.</p>
+          <p class="muted">To submit certificates: add images to <code>assets/certificates/</code> (e.g. certificate1.jpg) or upload to Google Drive and share the link</p>
         </div>
       </div>
     </section>
