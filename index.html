@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Varadharajan K — Aspiring Java Backend Developer</title>
   <meta name="description" content="Portfolio of Varadharajan K — Aspiring Java Backend Developer. Projects built with Spring Boot, MySQL and Thymeleaf." />
+  <meta name="keywords" content="Java, Spring Boot, MySQL, Thymeleaf, Microservices, Maven, Git, RDBMS, JobConnect, E-Commerce, Movie Ticket Booking" />
+  <!-- Open Graph -->
   <meta property="og:title" content="Varadharajan K — Aspiring Java Backend Developer" />
   <meta property="og:description" content="Portfolio of Varadharajan K — Aspiring Java Backend Developer. Projects built with Spring Boot, MySQL and Thymeleaf." />
   <meta property="og:type" content="website" />
@@ -34,7 +36,7 @@
 
       <div class="header-actions">
         <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-        <!-- Replace assets/resume.pdf with your hosted resume if preferred -->
+        <!-- Note: Replace assets/resume.pdf with your hosted resume if preferred -->
         <a class="btn resume" href="assets/resume.pdf" download aria-label="Download Resume">Resume</a>
       </div>
     </nav>
@@ -45,18 +47,20 @@
     <section id="hero" class="hero" role="region" aria-label="Hero">
       <div class="container hero-grid">
         <div class="hero-content">
-          <h1>Varadharajan K</h1>
+          <!-- Visible title (no text-clip) to ensure full readability -->
+          <h1 class="hero-title">Varadharajan K</h1>
           <p class="title">Aspiring Java Backend Developer</p>
 
-          <!-- Typing animation (order preserved as requested) -->
-          <p class="typing"><span id="typed" aria-live="polite"></span><span class="cursor" aria-hidden="true">|</span></p>
+          <!-- Typing animation (order preserved exactly) -->
+          <p class="typing"><span id="typed" aria-live="polite" aria-atomic="true"></span><span class="cursor" aria-hidden="true">|</span></p>
 
+          <!-- Make the paragraph fully visible with high contrast -->
           <p class="hero-bio">
-            Backend-focused developer skilled in building scalable systems, solving complex problems, and delivering maintainable web applications.
+            Passionate backend developer focused on creating scalable, maintainable web applications using Java and Spring Boot.
+            I enjoy solving complex problems, building real-time business solutions, and collaborating with teams to deliver production-ready features.
           </p>
 
           <div class="hero-ctas">
-            <!-- Inline comment: replace assets/resume.pdf with Google Drive link if needed -->
             <a class="btn primary" href="assets/resume.pdf" download>Download Resume</a>
             <a class="btn outline" href="#contact">Contact Me</a>
           </div>
@@ -111,9 +115,8 @@
         <h2>Skills</h2>
         <p class="muted">Only skills listed on the resume are shown.</p>
 
-        <div class="skill-groups" id="skills-list">
-          <!-- Skill cards rendered serverless/data-driven by script.js -->
-        </div>
+        <!-- skills populated data-driven by script.js -->
+        <div class="skill-groups" id="skills-list"></div>
       </div>
     </section>
 
@@ -123,9 +126,8 @@
         <h2>Projects</h2>
         <p class="muted">Projects were built with Spring Boot, MySQL, and Thymeleaf (backend code not included here).</p>
 
-        <div id="projects-grid" class="projects-grid" aria-live="polite">
-          <!-- Project cards populated by script.js (data-driven) -->
-        </div>
+        <!-- projects grid populated by script.js -->
+        <div id="projects-grid" class="projects-grid" aria-live="polite"></div>
       </div>
     </section>
 
@@ -201,13 +203,17 @@
           </div>
         </div>
 
-        <!-- Certificate carousel (mentor requested). Add images to assets/certificates/ -->
+        <!-- Certificate carousel (visible images) -->
         <div class="cert-carousel-section">
           <h3>Certificates</h3>
-          <div class="cert-carousel" id="cert-carousel" aria-roledescription="carousel">
-            <!-- Add certificate images named/placed in assets/certificates/ like certificate1.jpg -->
-            <!-- If no images found, carousel shows placeholder. Replace placeholders with real images. -->
+          <div class="cert-carousel" id="cert-carousel" aria-roledescription="carousel" tabindex="0">
+            <!-- script.js will add images from assets/certificates/ or fallback placeholders -->
           </div>
+          <div class="cert-controls">
+            <button id="cert-prev" aria-label="Previous certificate">◀</button>
+            <button id="cert-next" aria-label="Next certificate">▶</button>
+          </div>
+          <p class="muted">To submit certificates: add images to <code>assets/certificates/</code> in this repo (e.g. certificate1.jpg). Alternatively upload your certificate images to Google Drive and paste the shareable link(s) in the README or 'Certificates' field on your application portal.</p>
         </div>
       </div>
     </section>
@@ -240,22 +246,15 @@
           </div>
 
           <div class="contact-form">
-            <!-- IMPORTANT: this form is static — replace action="#" with your form endpoint or formspree/Netlify form action -->
+            <!-- IMPORTANT: this form is static — replace action="#" with your form endpoint or Netlify/Formspree action -->
             <form id="contactForm" action="#" method="POST" novalidate>
-              <div class="form-group">
-                <input type="text" id="name" name="name" placeholder="Your Name" required>
-              </div>
-              <div class="form-group">
-                <input type="email" id="email" name="email" placeholder="Your Email" required>
-              </div>
-              <div class="form-group">
-                <input type="text" id="subject" name="subject" placeholder="Subject" required>
-              </div>
-              <div class="form-group">
-                <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-              </div>
+              <div class="form-group"><input type="text" id="name" name="name" placeholder="Your Name" required></div>
+              <div class="form-group"><input type="email" id="email" name="email" placeholder="Your Email" required></div>
+              <div class="form-group"><input type="text" id="subject" name="subject" placeholder="Subject" required></div>
+              <div class="form-group"><textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea></div>
               <button type="submit" class="btn primary">Send Message</button>
             </form>
+            <p class="muted">Note: this is a static demo. To receive messages, set the form action to your endpoint (Formspree / Netlify / email service).</p>
           </div>
         </div>
       </div>
