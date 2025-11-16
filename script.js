@@ -1,9 +1,8 @@
-// script.js - full site behavior (typing, data-driven skills & projects, certificate carousel)
+// script.js - clean & final for deployment
+// Typing list (exact order)
+const TYPING_LIST = ['Java','Spring Boot','MySQL','Microservices','Thymeleaf','Docker'];
 
-// ---------- Configuration / Data ----------
-const TYPING_LIST = ['Java','Spring Boot','MySQL','Microservices','Thymeleaf','Docker']; // exact order required
-
-// Skills (only resume-listed)
+// SKILLS (only resume-listed, spelled correctly)
 const SKILLS = {
   "Languages": [
     { name: "Java", icon: "assets/icons/java.svg", value: 90 },
@@ -27,7 +26,7 @@ const SKILLS = {
   ]
 };
 
-// Projects data (exact content per your instruction)
+// PROJECTS (exact descriptions per resume)
 const PROJECTS = [
   {
     title: "E-Commerce Application — Spring Boot, MySQL, Thymeleaf",
@@ -52,11 +51,10 @@ const PROJECTS = [
   }
 ];
 
-// ---------- Helpers ----------
+// Helpers
 const $ = sel => document.querySelector(sel);
-const $$ = sel => Array.from(document.querySelectorAll(sel));
 
-// ---------- Typing animation (respect reduced motion) ----------
+// Typing animation (respects reduced-motion)
 (function typing() {
   const container = $('#typed');
   if (!container) return;
@@ -88,7 +86,7 @@ const $$ = sel => Array.from(document.querySelectorAll(sel));
   tick();
 })();
 
-// ---------- Render Skills (data-driven) ----------
+// Render skills
 (function renderSkills() {
   const list = $('#skills-list');
   if (!list) return;
@@ -134,7 +132,7 @@ const $$ = sel => Array.from(document.querySelectorAll(sel));
   });
 })();
 
-// ---------- Render Projects (data-driven) ----------
+// Render projects
 (function renderProjects() {
   const grid = $('#projects-grid');
   if (!grid) return;
@@ -158,57 +156,16 @@ const $$ = sel => Array.from(document.querySelectorAll(sel));
   });
 })();
 
-// ---------- Certificate Carousel ----------
-// This version loads (in order):
-// 1) Drive image (ID 1x_uAi... if available), 2) Drive profile image (ID 1yn2...), 3) Google Doc exported as PDF (ID 1Z7y...),
-// then local fallbacks assets/certificates/certificate1..6.jpg
+// Certificate carousel — embeds the Google Doc as PDF (your doc id) and shows local fallbacks
 (function certificates() {
   const wrapper = $('#cert-carousel');
   if (!wrapper) return;
   wrapper.innerHTML = '';
 
-  // Drive image IDs you gave earlier (two images)
-  const driveImageIds = [
-    '1x_uAiMOzAGiSnhScYGnTf4u4yQjniPgt', // earlier certificate link (if public)
-    '1yn2R7RkZFlSh1ZYcCcBzRczU6cLKVKsU'  // profile/photo link you provided
-  ];
-
-  // Google Doc id (export as PDF)
+  // Google Doc id (you provided this). Ensure sharing is "Anyone with the link - Viewer".
   const docId = '1Z7yD4XGpcDlWKB26P1e2770tHQM8FaoVM7yCnwipSYM';
 
-  // Helper to add an image slide by URL
-  function addImageSlide(url, altText) {
-    const slide = document.createElement('div');
-    slide.className = 'cert-slide';
-    const img = document.createElement('img');
-    img.src = url;
-    img.alt = altText || 'Certificate image';
-    img.loading = 'lazy';
-    img.onerror = function() {
-      // replace with friendly placeholder
-      const placeholder = document.createElement('div');
-      placeholder.style.minHeight = '160px';
-      placeholder.style.display = 'flex';
-      placeholder.style.alignItems = 'center';
-      placeholder.style.justifyContent = 'center';
-      placeholder.style.background = 'linear-gradient(135deg,#f1f5f9,#e2e8f0)';
-      placeholder.style.color = '#0f172a';
-      placeholder.style.padding = '12px';
-      placeholder.textContent = 'Certificate image not available — check sharing settings';
-      if (img.parentNode) img.parentNode.replaceChild(placeholder, img);
-    };
-    slide.appendChild(img);
-    wrapper.appendChild(slide);
-    return slide;
-  }
-
-  // 1) Add drive images (if public)
-  driveImageIds.forEach(id => {
-    const url = `https://drive.google.com/uc?export=view&id=${id}`;
-    addImageSlide(url, 'Certificate from Google Drive');
-  });
-
-  // 2) Add Google Doc exported as PDF embedded
+  // 1) Add embedded PDF slide (Google Doc exported as PDF)
   (function addDocPdf() {
     const slide = document.createElement('div');
     slide.className = 'cert-slide';
@@ -231,7 +188,7 @@ const $$ = sel => Array.from(document.querySelectorAll(sel));
     wrapper.appendChild(slide);
   })();
 
-  // 3) Local fallback images (certificate1..6)
+  // 2) Local fallback images: assets/certificates/certificate1.jpg ... certificate6.jpg
   for (let i = 1; i <= 6; i++) {
     const src = `assets/certificates/certificate${i}.jpg`;
     const slide = document.createElement('div');
@@ -240,14 +197,12 @@ const $$ = sel => Array.from(document.querySelectorAll(sel));
     img.src = src;
     img.alt = `Certificate ${i}`;
     img.loading = 'lazy';
-    img.onerror = function() {
-      this.style.display = 'none';
-    };
+    img.onerror = function() { this.style.display = 'none'; };
     slide.appendChild(img);
     wrapper.appendChild(slide);
   }
 
-  // Navigation and show logic
+  // Navigation
   const slides = Array.from(wrapper.querySelectorAll('.cert-slide'));
   if (slides.length === 0) return;
   let current = 0;
@@ -267,36 +222,15 @@ const $$ = sel => Array.from(document.querySelectorAll(sel));
   const nextBtn = document.getElementById('cert-next');
   prevBtn && prevBtn.addEventListener('click', () => show(current - 1));
   nextBtn && nextBtn.addEventListener('click', () => show(current + 1));
-
-  // keyboard navigation
   wrapper.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') show(current - 1);
     if (e.key === 'ArrowRight') show(current + 1);
   });
-
-  // focusable
   wrapper.setAttribute('tabindex', '0');
-
-  // show first slide
   setTimeout(() => show(0), 200);
 })();
 
-// ---------- Profile image override (optional) ----------
-// If you want to load a Drive image into the profile spots, uncomment/modify here.
-// Example profile Drive ID (from your link): '1yn2R7RkZFlSh1ZYcCcBzRczU6cLKVKsU'
-// The script will set the profile img src to Drive URL if it is desired.
-(function maybeLoadDriveProfile() {
-  // Uncomment and set id if you want the profile image loaded from Drive:
-  const profileDriveId = '1yn2R7RkZFlSh1ZYcCcBzRczU6cLKVKsU'; // provided by you
-  if (!profileDriveId) return;
-  const url = `https://drive.google.com/uc?export=view&id=${profileDriveId}`;
-  const profileImg = document.getElementById('profile-img');
-  const aboutPhoto = document.getElementById('about-photo');
-  if (profileImg) profileImg.src = url;
-  if (aboutPhoto) aboutPhoto.src = url;
-})();
-
-// ---------- Theme toggle (persisted) ----------
+// Theme toggle persisted
 (function themeToggle() {
   const btn = document.getElementById('theme-toggle');
   if (!btn) return;
@@ -312,7 +246,7 @@ const $$ = sel => Array.from(document.querySelectorAll(sel));
   });
 })();
 
-// ---------- Mobile nav toggle ----------
+// Mobile nav toggle
 (function navToggle() {
   const btn = document.getElementById('nav-toggle');
   const links = document.getElementById('nav-links');
@@ -324,7 +258,7 @@ const $$ = sel => Array.from(document.querySelectorAll(sel));
   });
 })();
 
-// ---------- Smooth scroll and active link highlight ----------
+// Smooth scroll & nav highlight
 (function scrollSpy() {
   const navLinks = Array.from(document.querySelectorAll('.nav-link'));
   function highlight() {
@@ -339,7 +273,6 @@ const $$ = sel => Array.from(document.querySelectorAll(sel));
   }
   window.addEventListener('scroll', highlight, { passive: true });
   document.addEventListener('DOMContentLoaded', highlight);
-
   navLinks.forEach(l => {
     l.addEventListener('click', (e) => {
       e.preventDefault();
@@ -349,7 +282,7 @@ const $$ = sel => Array.from(document.querySelectorAll(sel));
   });
 })();
 
-// ---------- Contact form (static demo) ----------
+// Contact form (static demo)
 (function contactForm(){
   const form = document.getElementById('contactForm');
   if(!form) return;
@@ -365,5 +298,5 @@ const $$ = sel => Array.from(document.querySelectorAll(sel));
   });
 })();
 
-// ---------- Footer year ----------
+// Footer year
 document.getElementById('year') && (document.getElementById('year').textContent = new Date().getFullYear());

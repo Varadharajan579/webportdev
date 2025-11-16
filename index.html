@@ -36,7 +36,7 @@
 
       <div class="header-actions">
         <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-        <!-- Note: Replace assets/resume.pdf with your hosted resume if preferred -->
+        <!-- Replace assets/resume.pdf with your resume file (same path) -->
         <a class="btn resume" href="assets/resume.pdf" download aria-label="Download Resume">Resume</a>
       </div>
     </nav>
@@ -47,14 +47,11 @@
     <section id="hero" class="hero" role="region" aria-label="Hero">
       <div class="container hero-grid">
         <div class="hero-content">
-          <!-- Visible title (no text-clip) to ensure full readability -->
           <h1 class="hero-title">Varadharajan K</h1>
           <p class="title">Aspiring Java Backend Developer</p>
 
-          <!-- Typing animation (order preserved exactly) -->
           <p class="typing"><span id="typed" aria-live="polite" aria-atomic="true"></span><span class="cursor" aria-hidden="true">|</span></p>
 
-          <!-- Make the paragraph fully visible with high contrast -->
           <p class="hero-bio">
             Passionate backend developer focused on creating scalable, maintainable web applications using Java and Spring Boot.
             I enjoy solving complex problems, building real-time business solutions, and collaborating with teams to deliver production-ready features.
@@ -78,18 +75,21 @@
         </div>
 
         <div class="hero-media" aria-hidden="false">
-          <!-- Profile image: if you want local use assets/profile.jpg; Drive image will be loaded by JS if present -->
-          <!-- Hero profile image (Drive) -->
-<img id="profile-img"
-     src="https://drive.google.com/uc?export=view&id=1yn2R7RkZFlSh1ZYcCcBzRczU6cLKVKsU"
-     alt="Profile photo of Varadharajan K"
-     class="profile-photo" />
-
-<!-- About/profile image (Drive) -->
-<img id="about-photo"
-     src="https://drive.google.com/uc?export=view&id=1yn2R7RkZFlSh1ZYcCcBzRczU6cLKVKsU"
-     alt="Profile photo of Varadharajan K"
-     class="about-photo" />
+          <!-- Placeholder avatar used instead of any incorrect profile photo -->
+          <div class="avatar-placeholder" aria-hidden="true">
+            <!-- Neutral SVG avatar -->
+            <svg width="150" height="150" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Avatar placeholder">
+              <defs>
+                <linearGradient id="g" x1="0" x2="1">
+                  <stop offset="0" stop-color="#dbeafe"/>
+                  <stop offset="1" stop-color="#f3e8ff"/>
+                </linearGradient>
+              </defs>
+              <rect width="120" height="120" rx="20" fill="url(#g)"/>
+              <circle cx="60" cy="44" r="20" fill="#fff"/>
+              <path d="M30 92c6-12 18-18 30-18s24 6 30 18" fill="#fff"/>
+            </svg>
+          </div>
 
           <div class="badges">
             <span class="badge">Problem Solving</span>
@@ -106,7 +106,11 @@
       <div class="container">
         <h2>About Me</h2>
         <div class="about-grid">
-          <img id="about-photo" src="assets/profile.jpg" alt="Profile photo" class="about-photo" />
+          <!-- placeholder: if you want your real photo later, add assets/profile.jpg and uncomment instructions in script.js -->
+          <div class="about-photo-placeholder" aria-hidden="true">
+            <svg width="140" height="140" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img"><rect width="120" height="120" rx="12" fill="#f8fafc"/><circle cx="60" cy="44" r="20" fill="#fff"/></svg>
+          </div>
+
           <div>
             <p class="summary">I am an aspiring Java backend developer with hands-on experience building web applications using Spring Boot and MySQL. I focus on designing scalable services, solving engineering problems, and collaborating effectively with teams to deliver production-ready features.</p>
             <p><strong>Highlights</strong></p>
@@ -138,7 +142,6 @@
         <h2>Projects</h2>
         <p class="muted">Projects were built with Spring Boot, MySQL, and Thymeleaf (backend code not included here).</p>
 
-        <!-- projects grid populated by script.js -->
         <div id="projects-grid" class="projects-grid" aria-live="polite"></div>
       </div>
     </section>
@@ -215,17 +218,17 @@
           </div>
         </div>
 
-        <!-- Certificate carousel (visible images) -->
+        <!-- Certificate carousel -->
         <div class="cert-carousel-section">
           <h3>Certificates</h3>
           <div class="cert-carousel" id="cert-carousel" aria-roledescription="carousel" tabindex="0">
-            <!-- script.js will add Drive images + Google Doc PDF + local placeholders -->
+            <!-- script.js will add Google Doc PDF slide + local certificate slides -->
           </div>
           <div class="cert-controls">
             <button id="cert-prev" aria-label="Previous certificate">◀</button>
             <button id="cert-next" aria-label="Next certificate">▶</button>
           </div>
-          <p class="muted">To submit certificates: add images to <code>assets/certificates/</code> (e.g. certificate1.jpg) or upload to Google Drive and share the link</p>
+          <p class="muted">To submit certificates: upload images to <code>assets/certificates/</code> (e.g. certificate1.jpg) or keep them on Google Drive/Docs and share link.</p>
         </div>
       </div>
     </section>
@@ -258,7 +261,6 @@
           </div>
 
           <div class="contact-form">
-            <!-- IMPORTANT: this form is static — replace action="#" with your form endpoint or Netlify/Formspree action -->
             <form id="contactForm" action="#" method="POST" novalidate>
               <div class="form-group"><input type="text" id="name" name="name" placeholder="Your Name" required></div>
               <div class="form-group"><input type="email" id="email" name="email" placeholder="Your Email" required></div>
